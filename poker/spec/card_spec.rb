@@ -3,14 +3,14 @@ require './lib/card.rb'
 
 describe Card do
   
-  context "#initialize" do
-    let(:card) { Card.new(5, :hearts) }
+  describe "#initialize" do
+    let(:card) { Card.new(8, :hearts) }
     
-    it "will have value 5" do
-      expect(card.value).to eq(5)
+    it "knows its value" do
+      expect(card.value).to eq(8)
     end
     
-    it "will have suit hearts" do
+    it "knows its suit" do
       expect(card.suit).to eq(:hearts)
     end
     

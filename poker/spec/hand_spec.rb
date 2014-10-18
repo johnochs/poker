@@ -8,7 +8,7 @@ describe Hand do
   deck = Deck.new
   suits = [:hearts, :spades, :diamonds, :clubs]
   
-  context '#initialize' do
+  describe '#initialize' do
     hand = Hand.new(deck[5])
 
     it 'has five cards' do
@@ -17,7 +17,7 @@ describe Hand do
   end
 
   describe "gives the correct value of the hand" do
-    context "straight flush" do
+    context "when straight flush" do
       let(:straight_flush) do
         straight_flush = []
         (2..6).each do |x|
@@ -31,7 +31,7 @@ describe Hand do
       end
     end
 
-    context "four of a kind" do
+    context "when four of a kind" do
       let(:four_of_a_kind) do
         four_of_a_kind = []
         4.times do
@@ -46,7 +46,7 @@ describe Hand do
       end
     end
 
-    context "full house" do
+    context "when full house" do
       let(:full_house) do
         f_h = []
         3.times do
@@ -157,7 +157,7 @@ describe Hand do
     end
   end
   
-  describe "the hand with the higher rank" do
+  describe "finds the right hand in a tiebreaker" do
     let(:pair) do
       Hand.new(
       [
@@ -182,10 +182,9 @@ describe Hand do
       )
     end
       
-    context "the higher value hand wins" do
-      it "should return true" do
-        expect(higher_pair.hand_rank).to be > pair.hand_rank
-      end
+    
+    it "should return true" do
+      expect(higher_pair.hand_rank).to be > pair.hand_rank
     end
       
   end

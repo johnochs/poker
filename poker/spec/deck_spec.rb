@@ -3,21 +3,20 @@ require './lib/deck.rb'
 
 describe Deck do
   let(:deck) { Deck.new }
-  context '#initialize' do
+  describe '#initialize' do
     
-    it 'will have 52 cards' do
+    it 'has 52 cards' do
       expect(deck.cards.count).to eq(52)
     end
     
-    it 'will have unique cards' do
+    it 'has unique cards' do
       deck.cards.each do |card|
         expect(deck.cards.index(card)).to eq(deck.cards.rindex(card))
       end 
     end
   end
-  
     
-  it 'can shuffle' do
+  it 'shuffles' do
     cards = deck.cards.dup
     deck.shuffle!
     expect(cards).not_to eq(deck.cards)
