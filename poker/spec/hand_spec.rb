@@ -10,27 +10,27 @@ describe Hand do
   
   context '#initialize' do
     hand = Hand.new(deck[5])
-    
+
     it 'has five cards' do
       expect(hand.cards.count).to eq(5)
     end
-  end  
-  
+  end
+
   describe "gives the correct value of the hand" do
     context "straight flush" do
-      let(:straight_flush) do 
+      let(:straight_flush) do
         straight_flush = []
         (2..6).each do |x|
           straight_flush << Card.new(x, :hearts)
         end
         Hand.new(straight_flush)
       end
-      
+
       it "returns value of 0" do
         expect(straight_flush.hand_value).to eq(0)
       end
     end
-    
+
     context "four of a kind" do
       let(:four_of_a_kind) do
         four_of_a_kind = []
@@ -40,7 +40,7 @@ describe Hand do
         four_of_a_kind += deck[1]
         Hand.new(four_of_a_kind)
       end
-      
+
       it "returns value of 1" do
         expect(four_of_a_kind.hand_value).to eq(1)
       end
@@ -57,7 +57,7 @@ describe Hand do
         end
         Hand.new(f_h)
       end
-      
+
       it "returns a value of 2" do
         expect(full_house.hand_value).to eq(2)
       end
@@ -70,12 +70,12 @@ describe Hand do
         f.map! { |c| c.suit = :hearts; c }
         Hand.new(f)
       end
-      
+
       it "returns value of 3" do
         expect(flush.hand_value).to eq(3)
       end
     end
-    
+
     context "straight" do
       let(:straight) do
         s = []
@@ -84,7 +84,7 @@ describe Hand do
         end
         Hand.new(s)
       end
-      
+
       it "returns value of 4" do
         expect(straight.hand_value).to eq(4)
       end
@@ -98,7 +98,7 @@ describe Hand do
         end
         Hand.new(t_k)
       end
-      
+
       it "returns value of 5" do
         expect(three_of_a_kind.hand_value).to eq(5)
       end
@@ -115,7 +115,7 @@ describe Hand do
         ]
         Hand.new(t_p)
       end
-      
+
       it "returns a value of 6" do
         expect(two_pair.hand_value).to eq(6)
       end
@@ -123,15 +123,17 @@ describe Hand do
 
     context "pair" do
       let(:pair) do
-        Hand.new([
+        Hand.new(
+        [
           Card.new(5, :hearts),
           Card.new(5, :hearts),
           Card.new(6, :clubs),
           Card.new(8, :clubs),
           Card.new(7, :hearts)
-        ])
+        ]
+        )
       end
-      
+
       it "returns a value of 7" do
         expect(pair.hand_value).to eq(7)
       end
@@ -139,13 +141,15 @@ describe Hand do
 
     context "high card" do
       let(:high_card) do
-        Hand.new([
+        Hand.new(
+        [
           Card.new(5, :hearts),
           Card.new(6, :hearts),
           Card.new(11, :clubs),
           Card.new(8, :clubs),
           Card.new(7, :hearts)
-        ])
+        ]
+        )
       end
       it "returns a value of 8" do
         expect(high_card.hand_value).to eq(8)
@@ -155,29 +159,34 @@ describe Hand do
   
   describe "the hand with the higher rank" do
     let(:pair) do
-      Hand.new([
+      Hand.new(
+      [
         Card.new(5, :hearts),
         Card.new(5, :hearts),
         Card.new(6, :clubs),
         Card.new(8, :clubs),
         Card.new(7, :hearts)
-      ])
+      ]
+      )
+    end
       
-      let(:higher_pair) do
-        Hand.new([
-          Card.new(5, :hearts),
-          Card.new(6, :hearts),
-          Card.new(6, :clubs),
-          Card.new(8, :clubs),
-          Card.new(7, :hearts)
-        ])
-      end
+    let(:higher_pair) do
+      Hand.new(
+      [
+        Card.new(5, :hearts),
+        Card.new(6, :hearts),
+        Card.new(6, :clubs),
+        Card.new(8, :clubs),
+        Card.new(7, :hearts)
+      ]
+      )
+    end
       
-      context "the higher value hand wins" do
-        it "should return true" do
-          expect(higher_pair.hand_rank).to be > pair.hand_rank
-        end
+    context "the higher value hand wins" do
+      it "should return true" do
+        expect(higher_pair.hand_rank).to be > pair.hand_rank
       end
     end
+      
   end
 end
